@@ -1,47 +1,61 @@
-Symfony Demo Application
-========================
+Symfony Demo Application in Docker
+==================================
 
-The "Symfony Demo Application" is a reference application created to show how
-to develop applications following the [Symfony Best Practices][1].
+The "Symfony Demo Application in Docker" is a project application for a [tutorial][2] based on [Symfony Demo Application][1].
+The tutorial explain you how to set-up a Symfony project in **Docker** environment. 
 
 Requirements
 ------------
 
   * PHP 7.2.9 or higher;
-  * PDO-SQLite PHP extension enabled;
-  * and the [usual Symfony application requirements][2].
+  * SQLite;
+  * Docker.
 
 Installation
 ------------
 
-[Download Symfony][4] to install the `symfony` binary on your computer and run
-this command:
+Clone this repository in your machine:
 
 ```bash
-$ symfony new --demo my_project
+https://github.com/clemdesign/docker-symfony-demo.git
 ```
 
-Alternatively, you can use Composer:
+Install dependencies:
 
 ```bash
-$ composer create-project symfony/symfony-demo my_project
+cd docker-symfony-demo
+composer install
 ```
+
+Run Docker:
+
+```bash
+docker-compose up -d
+```
+
+Migrate SQLite database to MySQL database - [Guide][3]:
+
+```bash
+goto data
+sqlite3 database_old.sql .dump > dump.sql
+cat dump.sql | python sqlite-to-mysql.py > dump-mysql.sql
+```
+
+Then import file `dump-sql` in the Docker Mysql Database <http://localhost:8080/>.
+
 
 Usage
 -----
 
-There's no need to configure anything to run the application. If you have
-[installed Symfony][4], run this command and access the application in your
-browser at the given URL (<https://localhost:8000> by default):
+When environement is installed and configured, start Docker is not yet:
 
 ```bash
-$ cd my_project/
-$ symfony serve
+docker-compose up -d
 ```
 
-If you don't have the Symfony binary installed, run `php -S localhost:8000 -t public/`
-to use the built-in PHP web server or [configure a web server][3] like Nginx or
-Apache to run the application.
+Access to application at <https://localhost:8000>.
+
+Access to PhpMyAdmin database management at <http://localhost:8080>.
 
 Tests
 -----
@@ -53,8 +67,13 @@ $ cd my_project/
 $ ./bin/phpunit
 ```
 
-[1]: https://symfony.com/doc/current/best_practices.html
-[2]: https://symfony.com/doc/current/reference/requirements.html
-[3]: https://symfony.com/doc/current/cookbook/configuration/web_server_configuration.html
-[4]: https://symfony.com/download
-[5]: https://github.com/symfony/webpack-encore
+License
+-------
+
+Copyright 2020 Clemdesign.
+
+Under MIT License.
+
+[1]: https://github.com/symfony/demo
+[2]: https://clemdesign.fr/blog/2020/docker-configurer-un-projet-symfony-partie-1-deployer-php-fpm-et-nginx
+[3]: https://clemdesign.fr/blog/2020/docker-configurer-un-projet-symfony-partie-3-migrer-une-base-sqlite-vers-mysql
