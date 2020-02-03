@@ -53,7 +53,7 @@ When environement is installed and configured, start Docker is not yet:
 docker-compose up -d
 ```
 
-Access to application at <https://localhost:8000>.
+Access to application at <http://localhost:8000>.
 
 Access to PhpMyAdmin database management at <http://localhost:8080>.
 
