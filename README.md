@@ -41,7 +41,7 @@ sqlite3 database_old.sql .dump > dump.sql
 cat dump.sql | python sqlite-to-mysql.py > dump-mysql.sql
 ```
 
-Then import file `dump-sql` in the Docker Mysql Database <http://localhost:8080/>.
+Then import `dump-mysql.sql` file in the Docker Mysql Database <http://localhost:8080/>.
 
 
 Usage
